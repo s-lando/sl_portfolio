@@ -18,6 +18,9 @@ defmodule SlPortfolioWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/about", PageController, :about
+    get "/portfolio", PageController, :portfolio
+    get "/music", MusicController, :index
   end
 
   # Other scopes may use custom stacks.

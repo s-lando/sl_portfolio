@@ -1,6 +1,99 @@
 /* This file is for your main application CSS */
 @import "./phoenix.css";
 
+body {
+  margin: 0;
+}
+
+/*Custom CSS*/
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #4f769d;
+  margin: 0;
+}
+
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  height: 95vh;
+  border-right: 1px solid #abb6de5b;
+  text-align: center;
+}
+
+.nav-links{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.nav-links a {
+
+  color: #4f769d;
+  font-weight: bold;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.nav-links a:hover {
+  color: #41566b;
+  background-color: #e2e8e63c;
+}
+
+a {
+  color: #ff5a4b;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #b82b1e;
+  text-decoration: none;
+}
+
+
+
+.divider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  height: 100vh;
+}
+
+.fader {
+  animation: fade .5s ease-in-out;
+  animation-fill-mode: forwards;
+  align-items: center;
+  width: 100%;
+
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;
@@ -12,6 +105,7 @@
   color: #31708f;
   background-color: #d9edf7;
   border-color: #bce8f1;
+  
 }
 .alert-warning {
   color: #8a6d3b;
@@ -93,7 +187,7 @@
 }
 
 .fade-in {
-  animation: 0.2s ease-out 0s normal forwards 1 fade-in-keys;
+  animation: 0.7s ease-out 0s normal forwards 1 fade-in-keys;
 }
 .fade-out {
   animation: 0.2s ease-out 0s normal forwards 1 fade-out-keys;
@@ -117,4 +211,27 @@
 @keyframes fade-out-keys{
   0% { opacity: 1; }
   100% { opacity: 0; }
+}
+
+.typewriter {
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .05em solid rgb(0, 0, 0); /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+
+
+  animation: 
+    typing 1.5s steps(40, end),
+    blink-caret 1s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: rgb(0, 0, 0); }
 }
