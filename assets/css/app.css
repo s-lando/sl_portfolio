@@ -7,15 +7,30 @@ body {
 
 a:hover {
   text-decoration: none;
-  color: #334882;
+  color: #ffea76;
+}
+
+a:focus{
+
+  text-decoration: none;
+  color: #ff5a4b;
 }
 
 /*Custom CSS*/
 .title {
   font-size: 26px;
   font-weight: 600;
-  color: #4f769d;
+  color: #ffffff;
   margin: 0;
+  
+}
+
+.avatar-container {
+  display: flex;
+  margin-top: 1em;
+  margin-left: 1em;
+
+
 }
 
 .avatar {
@@ -28,10 +43,13 @@ a:hover {
 .nav {
   display: flex;
   flex-direction: column;
-  width: 10vw;
-  height: 95vh;
-  border-right: 1px solid #abb6de5b;
+  width: 40vw;
+  height: 100vh;
+  border-right: 2px solid #abb6de5b;
   text-align: center;
+  padding-right: 10px;
+  background-color: #428fa9;
+  
 }
 
 
@@ -45,7 +63,7 @@ a:hover {
 
 .nav-links a {
 
-  color: #4f769d;
+  color: #f7f7f7;
   font-weight: bold;
   text-decoration: none;
   border: none;
@@ -55,7 +73,7 @@ a:hover {
 }
 
 .nav-links a:hover {
-  color: #334882;
+  color: #e7e579;
 }
 
 .social-links {
@@ -66,6 +84,12 @@ a:hover {
 .social-links img {
   width: 50px;
   cursor: pointer;
+  filter: invert(100%);
+}
+
+.social-links img:hover {
+  filter: invert(0%);
+
 }
 
 .social-links a {
@@ -92,11 +116,13 @@ a:hover {
 }
 
 .fader {
-  animation: fade .75s ease-in-out;
+  display: flex;
+  animation: fade .85s ease-in-out;
   animation-fill-mode: forwards;
   align-items: center;
   width: 100%;
-
+  height: 100%;
+  text-align: center;
 }
 
 @keyframes fade {
@@ -116,6 +142,24 @@ a:hover {
     opacity: 0;
   }
 }
+ 
+
+.after-change {
+
+  text-align: left;
+  margin: auto;
+  width: 50%;
+
+}
+
+ul {
+  list-style-type: disc;
+
+
+}
+
+
+
 
 
 
@@ -231,6 +275,11 @@ a:hover {
     flex-direction: row;
     width: 100vw;
     height: 10vh;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    margin-bottom: 2em;
+    
   }
 
   .nav-links {
@@ -245,8 +294,6 @@ a:hover {
   }
 
   .avatar {
-    margin-top: .5em;
-    margin-left: 7px;
     width: 60px !important;
     height: 60px !important;
   }
