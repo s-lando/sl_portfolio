@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content={csrf_token_value()} />
-    <%= live_title_tag(assigns[:page_title] || "SlPortfolio", suffix: " · Phoenix Framework") %>
+    <%= live_title_tag("SamLando.com") %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
     <script
       defer
@@ -30,8 +30,9 @@
         <div class="nav-links">
           <%= link("About", to: "/about") %>
           <%= link("Portfolio", to: "/portfolio") %>
-
+          <%= link("Homage to Shadow", to: "/shadow") %>
           <%= link("Year End Lists", to: "/music") %>
+          
 
           <div class="social-links">
             <a

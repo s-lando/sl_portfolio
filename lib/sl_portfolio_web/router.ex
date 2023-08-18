@@ -21,6 +21,7 @@ defmodule SlPortfolioWeb.Router do
     get "/about", PageController, :about
     get "/portfolio", PageController, :portfolio
     get "/music", MusicController, :index
+    get "/shadow", PageController, :shadow
   end
 
   # Other scopes may use custom stacks.
