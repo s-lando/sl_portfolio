@@ -17,13 +17,12 @@
   </head>
 
   <body>
-    <div></div>
 
     <div class="divider">
       <div class="nav">
         <div class="avatar-container">
         <%= link to: "/" do %>
-          <img class="avatar" src="/images/avatar.JPG" alt="Avatar" class="avatar" />
+          <img class="avatar" src="/images/avatar.JPG" alt="Avatar" class="avatar" width="90px" height="90px" />
           <!--<p class="title">Sam Lando</p> -->
         <% end %>
       </div>
@@ -41,16 +40,16 @@
               "
               target="_blank"
             >
-              <img src="/images/linkedin.png" alt="LinkedIn" class="social-icon" />
+              <img src="/images/linkedin.png" alt="LinkedIn" class="social-icon" width="50px" height="50px" />
             </a>
             <a href="https://github.com/s-lando" target="_blank">
-              <img src="/images/github.png" alt="GitHub" class="social-icon" />
+              <img src="/images/github.png" alt="GitHub" class="social-icon" width="50px" height="50px"  />
             </a>
             <a
               href="https://open.spotify.com/user/northvanslando?si=1b73d5d208a74c52"
               target="_blank"
             >
-              <img src="/images/spotify.png" alt="Spotify" class="social-icon" />
+              <img src="/images/spotify.png" alt="Spotify" class="social-icon" width="50px" height="50px"  />
             </a>
           </div>
         </div>
@@ -60,5 +59,6 @@
         <%= @inner_content %>
       </div>
     </div>
+
   </body>
 </html>
