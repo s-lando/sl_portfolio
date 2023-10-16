@@ -5,9 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content={csrf_token_value()} />
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
     <%= live_title_tag("SamLando.com") %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
     <script
@@ -20,22 +19,27 @@
   </head>
 
   <body>
-
     <div class="divider">
       <div class="nav">
         <div class="avatar-container">
-        <%= link to: "/" do %>
-          <img class="avatar" src="/images/avatar.JPG" alt="Avatar" class="avatar" width="90px" height="90px" />
-          <!--<p class="title">Sam Lando</p> -->
-        <% end %>
-      </div>
+          <%= link to: "/" do %>
+            <img
+              class="avatar"
+              src="/images/avatar.JPG"
+              alt="Avatar"
+              class="avatar"
+              width="90"
+              height="90"
+            />
+            <!--<p class="title">Sam Lando</p> -->
+          <% end %>
+        </div>
 
         <div class="nav-links">
           <%= link("About", to: "/about") %>
           <%= link("Portfolio", to: "/portfolio") %>
           <%= link("Homage to Shadow", to: "/shadow") %>
           <%= link("Year End Lists", to: "/music") %>
-          
 
           <div class="social-links">
             <a
@@ -44,16 +48,34 @@
               "
               target="_blank"
             >
-              <img src="/images/linkedin.png" alt="LinkedIn" class="social-icon" width="50px" height="50px" />
+              <img
+                src="/images/linkedin.png"
+                alt="LinkedIn"
+                class="social-icon"
+                width="50"
+                height="50"
+              />
             </a>
             <a href="https://github.com/s-lando" target="_blank">
-              <img src="/images/github.png" alt="GitHub" class="social-icon" width="50px" height="50px"  />
+              <img
+                src="/images/github.png"
+                alt="GitHub"
+                class="social-icon"
+                width="50"
+                height="50"
+              />
             </a>
             <a
               href="https://open.spotify.com/user/northvanslando?si=1b73d5d208a74c52"
               target="_blank"
             >
-              <img src="/images/spotify.png" alt="Spotify" class="social-icon" width="50px" height="50px"  />
+              <img
+                src="/images/spotify.png"
+                alt="Spotify"
+                class="social-icon"
+                width="50"
+                height="50"
+              />
             </a>
           </div>
         </div>
@@ -63,6 +85,5 @@
         <%= @inner_content %>
       </div>
     </div>
-
   </body>
 </html>

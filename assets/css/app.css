@@ -141,18 +141,22 @@ a:focus{
 
 .photo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(max(250px, 30%), 1fr));
-  grid-gap: 10px;
-  margin: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(max(200px, 30%), 1fr));
+  grid-gap: 5px;
+  margin: 10px;
 }
 
 .photo {
   display: flex;
+  margin-top: 1em;
 }
 
 .photo img {
+  width: 95%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(1, 0, 0, 0.1);
   margin: auto;
-
 }
 
 
@@ -304,7 +308,7 @@ ul {
 }
 
 @media screen and (max-width: 800px) {
-  
+
 
   .lists {
 
