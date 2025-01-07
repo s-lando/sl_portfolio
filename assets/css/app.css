@@ -248,6 +248,8 @@ ul {
   width: 550px;
   border: 1px solid #ddd;
   padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: #000000;
@@ -264,14 +266,45 @@ ul {
   height: auto;
 }
 
+.portfolio-grid a:focus {
+  text-decoration: none;
+  color: #000000;
+}
+
 .project-title {
   margin-top: 10px;
+  text-align: left;
 }
 
 .project-description {
   margin-top: 10px;
   font-size: 1.5rem;
   color: #000000;
+  text-align: left;
+}
+
+.tech-labels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  margin-top: 10px;
+}
+
+.tech-label {
+  background-color: #20aac2;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 12px;
+  margin: 5px;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.divider-line {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 15px 0;
+  width: 100%;
 }
 /* 
 .project-link {
