@@ -340,16 +340,33 @@ ul {
   }
 }
 
+.welcome {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+}
+
+.signature {
+  text-align: right;
+  margin-right: 2em;
+}
+
 @media screen and (max-width: 800px) {
 
+  
 
   .lists {
 
     display: block;
     margin: auto;
     text-align: left;
-    width: 50%;
+    width: 80%;
 
+  }
+
+  .bio {
+    width: 80%;
+    text-align: left;
+    margin: auto;
   }
   .portfolio-box {
     width: 400px;
@@ -363,11 +380,10 @@ ul {
   .nav {
     flex-direction: row;
     width: 100vw;
-    height: 10vh;
+    height: 10dvh;
     position: sticky;
     top: 0;
     z-index: 1;
-    margin-bottom: 2em;
     
   }
 
@@ -384,7 +400,7 @@ ul {
 
   .avatar {
     width: 60px !important;
-    height: 60px !important;
+    height: 50px !important;
   }
 
   .divider {
@@ -417,6 +433,7 @@ ul {
   .nav {
     font-size: 14px;
   }
+  
 
   .portfolio-box {
     width: 300px;
