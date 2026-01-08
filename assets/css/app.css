@@ -6,6 +6,73 @@ body {
   
 }
 
+div[data-phx-main] {
+  width: 100%;
+  height: 100%;
+}
+
+  /* year end lists  */
+
+
+
+  
+  .controls-section {
+  }
+
+  .year-select-form {
+    margin: auto;
+  }
+
+
+  .category-button {
+    background-color: #429fa9;
+    color: #ffffff;
+    padding: 5px 10px;
+
+    margin: 2px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    line-height: 2;
+    border: 1px solid #297886;
+    font-weight: bold;
+
+  }
+  .category-button:hover {
+    background-color: #429FA9;
+    color: #e7e579;
+  }
+
+  .category-button.active {
+    background-color: #429FA9;
+    /* same yellow as the text color */
+    color:#e7e579;
+  }
+  .item-image {
+    width: 40%;
+    height: 100%;
+    object-fit: cover;
+    margin: auto;
+    padding: 1em;
+  }
+
+  .item-card {
+    padding-top: 1em;
+    margin: 3em;
+  }
+
+  .lists-page {
+    padding: 1em;
+  }
+
+  .item-info {
+    margin: 1em;
+  }
+
+
+  .fav-songs {
+    font-style: italic;
+  }
+
 a:hover {
   text-decoration: none;
   color: #297886;
@@ -422,6 +489,11 @@ ul {
     text-align: center;
     align-self: center;
   }
+
+
+
+
+
 }
 
 @media screen and (max-width: 550px) {

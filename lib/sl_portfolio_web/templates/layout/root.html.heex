@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" /> <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content={csrf_token_value()} />
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
-    <%= live_title_tag("SamLando.com") %>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" /> <%= live_title_tag(
+      "SamLando.com"
+    ) %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
     <script
       defer
@@ -17,7 +17,7 @@
     >
     </script>
   </head>
-
+  
   <body>
     <div class="divider">
       <div class="nav">
@@ -34,13 +34,10 @@
             <!--<p class="title">Sam Lando</p> -->
           <% end %>
         </div>
-
+        
         <div class="nav-links">
-          <%= link("About", to: "/about") %>
-          <%= link("Portfolio", to: "/portfolio") %>
-          <%= link("Shadow", to: "/shadow") %>
-          <%= link("Lists", to: "/music") %>
-
+          <%= link("About", to: "/about") %> <%= link("Portfolio", to: "/portfolio") %> <%= link(
+            "Shadow", to: "/shadow") %> <%= link("EOY Lists", to: "/music") %>
           <div class="social-links">
             <a
               href="
@@ -56,6 +53,7 @@
                 height="50"
               />
             </a>
+            
             <a href="https://github.com/s-lando" target="_blank">
               <img
                 src="/images/github.png"
@@ -65,6 +63,7 @@
                 height="50"
               />
             </a>
+            
             <a
               href="https://open.spotify.com/user/northvanslando?si=1b73d5d208a74c52"
               target="_blank"
@@ -80,7 +79,7 @@
           </div>
         </div>
       </div>
-
+      
       <div class="fader">
         <%= @inner_content %>
       </div>

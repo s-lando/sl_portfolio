@@ -1,0 +1,100 @@
+<div class="lists-page">
+  <%!-- <h1>End of Year Lists</h1> --%>
+  <div class="controls-section">
+    <div class="year-select-section">
+      <form phx-change="select_year" class="year-select-form">
+        <%!-- <label for="year-select">Select a Year:</label> --%>
+        <select id="year-select" name="year" class="year-select">
+          <%= for year <- @all_years do %>
+            <%= if year == @selected_year do %>
+              <option value={year} selected>
+                <%= year %>
+              </option>
+            <% else %>
+              <option value={year}>
+                <%= year %>
+              </option>
+            <% end %>
+          <% end %>
+        </select>
+      </form>
+    </div>
+    
+    <div class="categories-section">
+      <%!-- <h2>Select a Category</h2> --%>
+      <div class="categories-list">
+        <%= for category <- @categories do %>
+          <button
+            phx-click="select_category"
+            phx-value-category={category}
+            class={
+              if category == @selected_category,
+                do: "category-button active",
+                else: "category-button"
+            }
+          >
+            <%= Phoenix.Naming.humanize(category) %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <%= if @selected_year && @selected_category do %>
+    <div class="items-section">
+      <%!-- <h2>
+        <%= Phoenix.Naming.humanize(@selected_category) %> - <%= @selected_year %>
+      </h2> --%>
+      <%= cond do %>
+        <% @items == :external -> %>
+          <% external_url = SlPortfolio.Music.get_external_url(@selected_category, @selected_year) %>
+          <div class="external-link">
+            <p>This list is available on an external platform.</p>
+            
+            <a
+              href={external_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="external-link-button"
+            >
+              View on External Platform →
+            </a>
+          </div>
+        <% Enum.empty?(@items) -> %>
+          <p>
+            No items found for <%= Phoenix.Naming.humanize(@selected_category) %> in <%= @selected_year %>.
+          </p>
+        <% true -> %>
+          <div class="items-grid">
+            <%= for item <- @items do %>
+              <div class="item-card">
+                <h2 class="item-title">
+                  <%= item.title %>
+                  <%= if item[:artist] do %>
+                    — <%= item.artist %>
+                  <% end %>
+                </h2>
+                 <%!-- <div class="item-rank">#<%= item.rank %></div> --%>
+                <%= if item[:image_src] do %>
+                  <div class="item-image">
+                    <img src={item.image_src} alt={item.title} />
+                  </div>
+                <% end %>
+                
+                <div class="item-info">
+                  <%= if item[:fav_songs] && length(item.fav_songs) > 0 do %>
+                    <div class="fav-songs">
+                      Fav Tracks:
+                      <%= for song <- item.fav_songs do %>
+                        <%= song %>,
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

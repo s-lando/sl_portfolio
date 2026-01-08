@@ -19,7 +19,7 @@ defmodule SlPortfolio.MixProject do
   def application do
     [
       mod: {SlPortfolio.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :inets]
     ]
   end
 
