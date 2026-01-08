@@ -20,7 +20,7 @@ defmodule SlPortfolioWeb.Router do
     get "/", PageController, :index
     get "/about", PageController, :about
     get "/portfolio", PageController, :portfolio
-    live "/music", MusicLive.Index
+    live "/eoy-lists", MusicLive.Index
     get "/shadow", PageController, :shadow
   end
 
