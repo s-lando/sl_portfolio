@@ -57,7 +57,7 @@
               rel="noopener noreferrer"
               class="external-link-button"
             >
-              View on External Platform →
+              View Here
             </a>
           </div>
         <% Enum.empty?(@items) -> %>
@@ -69,7 +69,10 @@
             <%= for item <- @items do %>
               <div class="item-card">
                 <h2 class="item-title">
-                  <%= item.title %>
+                  <%= if item[:title] do %>
+                    <%= item.title %>
+                  <% end %>
+                  
                   <%= if item[:artist] do %>
                     — <%= item.artist %>
                   <% end %>
@@ -78,6 +81,12 @@
                 <%= if item[:image_src] do %>
                   <div class="item-image">
                     <img src={item.image_src} alt={item.title} />
+                  </div>
+                <% end %>
+                
+                <%= if item[:description] do %>
+                  <div class="item-description">
+                    <%= item.description %>
                   </div>
                 <% end %>
                 

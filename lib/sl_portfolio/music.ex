@@ -48,16 +48,83 @@ defmodule SlPortfolio.Music do
           image_src: "/images/albums/love_my_computer_2.png"
         },
         %{
+          title: "viagr aboys",
+          artist: "Viagra Boys",
+          rank: 2,
+          fav_songs: ["Man Made of Meat", "Dirty Boyz"],
+          image_src: "/images/albums/viagra_boys.png"
+        },
+        %{
           title: "Don't Tap The Glass",
           artist: "Tyler, The Creator",
-          rank: 2,
+          rank: 3,
           fav_songs: ["Big Poe", "Sugar On My Tongue"],
           image_src: "/images/albums/don't_tap_the_glass.png"
+        },
+        %{
+          title: "They Left Me With The Sword/Gun (Double EP)",
+          artist: "Paris Texas",
+          rank: 4,
+          fav_songs: ["infinyte", "Stripper Song"],
+          image_src: "/images/albums/paris_texas.png"
+        },
+        %{
+          title: "Getting Killed",
+          artist: "Geese",
+          rank: 5,
+          fav_songs: ["Husbands", "Cobra"],
+          image_src: "/images/albums/getting_killed.png"
+        },
+        %{
+          title: "Let God Sort Em Out",
+          artist: "Clipse",
+          rank: 6,
+          fav_songs: ["Chains & Whips", "MTBTTF"],
+          image_src: "/images/albums/clipse.png"
         }
       ],
-      shows: %{},
-      books: %{},
-      games: %{}
+      shows: [
+        %{
+          title: "The Rehearsal",
+          artist: "Season 2",
+          rank: 1,
+          image_src: "/images/shows/rehearsal.jpg"
+        },
+        %{
+          title: "Severance",
+          artist: "Season 2",
+          rank: 2,
+          image_src: "/images/shows/severance.webp"
+        },
+        %{
+          title: "Long Story Short",
+          rank: 5,
+          image_src: "/images/shows/long_story_short.jpg"
+        },
+        %{
+          title: "Pluribus",
+          rank: 3,
+          image_src: "/images/shows/pluribus.webp"
+        }
+      ],
+      books: [
+        %{
+          description:
+            "Embarrassingly, I only read two books this year: The Inner Game of Tennis by Timothy Gallwey and Value(s) by Mark Carney. And I wouldn't say I would recommend Value(s) either. But I'm determined to read more in 2026 and am putting this here to motivate myself."
+        }
+      ],
+      games: [
+        %{
+          title: "Hollow Knight: Silksong",
+          rank: 1,
+          image_src: "/images/games/silksong.jpeg"
+        },
+        %{
+          title: "Hades II",
+          rank: 2,
+          image_src: "/images/games/hades_2.jpg"
+        }
+      ]
     }
   }
 
@@ -134,6 +201,7 @@ defmodule SlPortfolio.Music do
   Returns the list of items for a given category and year.
   Returns an empty list if the year doesn't exist or is external.
   """
+
   def get_items_by_category_and_year(category, year)
       when category in @categories and is_integer(year) do
     case get_category_data(category, year) do
