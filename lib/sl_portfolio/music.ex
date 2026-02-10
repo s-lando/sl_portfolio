@@ -123,6 +123,11 @@ defmodule SlPortfolio.Music do
           title: "Hades II",
           rank: 2,
           image_src: "/images/games/hades_2.jpg"
+        },
+        %{
+          title: "Arc Raiders",
+          rank: 3,
+          image_src: "/images/games/arc-raiders.webp"
         }
       ]
     }
