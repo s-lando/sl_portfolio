@@ -80,7 +80,13 @@
                  <%!-- <div class="item-rank">#<%= item.rank %></div> --%>
                 <%= if item[:image_src] do %>
                   <div class="item-image">
-                    <img src={item.image_src} alt={item.title} />
+                    <%= if item[:spotify_url] do %>
+                      <a href={item.spotify_url} target="_blank" rel="noopener noreferrer">
+                        <img src={item.image_src} alt={item.title} />
+                      </a>
+                    <% else %>
+                      <img src={item.image_src} alt={item.title} />
+                    <% end %>
                   </div>
                 <% end %>
                 

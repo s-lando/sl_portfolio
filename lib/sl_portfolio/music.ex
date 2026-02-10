@@ -45,42 +45,54 @@ defmodule SlPortfolio.Music do
           artist: "Ninajirachi",
           rank: 1,
           fav_songs: ["iPod Touch", "London Song"],
-          image_src: "/images/albums/love_my_computer_2.png"
+          image_src: "/images/albums/love_my_computer_2.png",
+          spotify_url:
+            "https://open.spotify.com/album/77CZUF57sYqgtznUe3OikQ?si=_ABSfuB1Tr2PLJAgNwDMgA"
         },
         %{
           title: "viagr aboys",
           artist: "Viagra Boys",
           rank: 2,
           fav_songs: ["Man Made of Meat", "Dirty Boyz"],
-          image_src: "/images/albums/viagra_boys.png"
+          image_src: "/images/albums/viagra_boys.png",
+          spotify_url:
+            "https://open.spotify.com/album/0ibbISvq4loJXVtZquKrQB?si=kMZmsIq3QCOJoDw6_8PEQQ"
         },
         %{
           title: "Don't Tap The Glass",
           artist: "Tyler, The Creator",
           rank: 3,
           fav_songs: ["Big Poe", "Sugar On My Tongue"],
-          image_src: "/images/albums/don't_tap_the_glass.png"
+          image_src: "/images/albums/don't_tap_the_glass.png",
+          spotify_url:
+            "https://open.spotify.com/album/1jzv3jwZbt8lYfEtMjiD1R?si=M88AvUcbRGecQDmd7ZCJOg"
         },
         %{
           title: "They Left Me With The Sword/Gun (Double EP)",
           artist: "Paris Texas",
           rank: 4,
           fav_songs: ["infinyte", "Stripper Song"],
-          image_src: "/images/albums/paris_texas.png"
+          image_src: "/images/albums/paris_texas.png",
+          spotify_url:
+            "https://open.spotify.com/album/5UUUoyYmeB0M157u9MfHXg?si=zJcJYkPoR3m3lmqRryMIhA"
         },
         %{
           title: "Getting Killed",
           artist: "Geese",
           rank: 5,
           fav_songs: ["Husbands", "Cobra"],
-          image_src: "/images/albums/getting_killed.png"
+          image_src: "/images/albums/getting_killed.png",
+          spotify_url:
+            "https://open.spotify.com/album/0eeXb23yMW6EaIgm63xxPC?si=Jx4SRQG_T3aLckjAMIroig"
         },
         %{
           title: "Let God Sort Em Out",
           artist: "Clipse",
           rank: 6,
           fav_songs: ["Chains & Whips", "MTBTTF"],
-          image_src: "/images/albums/clipse.png"
+          image_src: "/images/albums/clipse.png",
+          spotify_url:
+            "https://open.spotify.com/album/17ScNnJ0lSWajodZaRpHdQ?si=EH18SBLTQfKCxqCTFSRtDA"
         }
       ],
       shows: [
