@@ -19,25 +19,7 @@ defmodule SlPortfolio.Music do
       books: %{},
       games: %{}
     },
-    2021 => %{
-      music: [
-        %{
-          title: "Example Album 1",
-          rank: 1,
-          fav_songs: ["Song A", "Song B", "Song C"],
-          image_src: "/images/albums/2021/album1.jpg"
-        },
-        %{
-          title: "Example Album 2",
-          rank: 2,
-          fav_songs: ["Song D", "Song E"],
-          image_src: "/images/albums/2021/album2.jpg"
-        }
-      ],
-      shows: %{},
-      books: %{},
-      games: %{}
-    },
+
     2025 => %{
       music: [
         %{
