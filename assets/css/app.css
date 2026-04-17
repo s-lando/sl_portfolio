@@ -384,6 +384,11 @@ ul {
   margin: 15px 0;
   width: 100%;
 }
+
+.item-description {
+
+  text-align: left;
+}
 /* 
 .project-link {
   display: inline-block;
