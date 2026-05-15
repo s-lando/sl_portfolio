@@ -73,10 +73,21 @@ defmodule SlPortfolioWeb.ChessLive.Index do
   end
 
   defp extract_ip(socket) do
-    case get_connect_info(socket, :peer_data) do
-      %{address: addr} -> addr |> :inet.ntoa() |> to_string()
-      _ -> "127.0.0.1"
-    end
+    x_headers = get_connect_info(socket, :x_headers) || []
+
+    forwarded =
+      x_headers
+      |> Enum.find(fn {name, _} -> String.downcase(name) == "x-forwarded-for" end)
+      |> case do
+        {_, ips} -> ips |> String.split(",") |> List.first() |> String.trim()
+        nil -> nil
+      end
+
+    forwarded ||
+      case get_connect_info(socket, :peer_data) do
+        %{address: addr} -> addr |> :inet.ntoa() |> to_string()
+        _ -> "127.0.0.1"
+      end
   end
 
   defp game_assigns(game) do
