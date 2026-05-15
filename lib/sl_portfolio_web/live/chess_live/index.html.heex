@@ -1,0 +1,84 @@
+<div class="chess-page">
+  <div class="chess-header">
+    <p>
+      This is a work in progress, but it's a chess game where anyone can make the next move.
+    </p>
+    <p>
+      See the history of the game below and contribute by making a move!
+    </p>
+    <p class="chess-turn">
+      <%= if @game.status == :playing do %>
+        <%= String.capitalize(Atom.to_string(@game.turn)) %>'s turn
+      <% else %>
+        <%= status_message(@game.status) %>
+      <% end %>
+    </p>
+  </div>
+
+  <div class="chess-board">
+    <%= for row <- 7..0//-1 do %>
+      <div class="chess-row">
+        <%= for col <- 0..7 do %>
+          <% square = {col, row} %>
+          <% piece = Chess.Board.get(@game.board, square) %>
+          <% selected = square == @selected %>
+          <% legal = square in @legal_moves %>
+          <% last_move = square in @last_move_squares %>
+          <% in_check = square == @check_square %>
+          <% dark = rem(col + row, 2) == 0 %>
+          <button
+            class={square_classes(dark, selected, last_move, legal, in_check)}
+            phx-click="select_square"
+            phx-value-col={col}
+            phx-value-row={row}
+          >
+            <%= if col == 0 do %>
+              <span class="coord coord-rank"><%= row + 1 %></span>
+            <% end %>
+            <%= if row == 0 do %>
+              <span class="coord coord-file"><%= <<?a + col>> %></span>
+            <% end %>
+            <%= if piece do %>
+              <span class={"piece piece-#{piece.color}"}><%= piece_glyph(piece) %></span>
+            <% end %>
+            <%= if legal do %>
+              <span class={if piece, do: "legal-ring", else: "legal-dot"}></span>
+            <% end %>
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= if @game.status != :playing do %>
+    <div class="chess-footer">
+      <button phx-click="reset" class="reset-button">New Game</button>
+    </div>
+  <% end %>
+
+  <%= if length(@log) > 0 do %>
+    <div class="move-log">
+      <h3>Move History</h3>
+      <table class="move-log-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Move</th>
+            <th>Location</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= for {entry, index} <- Enum.with_index(@log) do %>
+            <tr class={if rem(index, 2) == 0, do: "log-row-even", else: "log-row-odd"}>
+              <td class="log-num"><%= length(@log) - index %></td>
+              <td class="log-move"><%= move_label(entry.move) %></td>
+              <td class="log-location"><%= entry.location %></td>
+              <td class="log-time"><%= format_timestamp(entry.at) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

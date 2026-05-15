@@ -12,6 +12,8 @@ defmodule SlPortfolio.Application do
       SlPortfolioWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: SlPortfolio.PubSub},
+      # Start the shared chess game
+      SlPortfolio.Chess.GameServer,
       # Start the Endpoint (http/https)
       SlPortfolioWeb.Endpoint
       # Start a worker by calling: SlPortfolio.Worker.start_link(arg)

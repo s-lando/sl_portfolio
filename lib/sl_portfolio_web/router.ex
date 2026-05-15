@@ -21,6 +21,7 @@ defmodule SlPortfolioWeb.Router do
     get "/about", PageController, :about
     get "/portfolio", PageController, :portfolio
     live "/eoy-lists", MusicLive.Index
+    live "/chess", ChessLive.Index
     get "/shadow", PageController, :shadow
   end
 
