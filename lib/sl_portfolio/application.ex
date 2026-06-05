@@ -10,6 +10,8 @@ defmodule SlPortfolio.Application do
     children = [
       # Start the Telemetry supervisor
       SlPortfolioWeb.Telemetry,
+      # Start the Repo
+      SlPortfolio.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: SlPortfolio.PubSub},
       # Start the shared chess game

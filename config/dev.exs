@@ -63,3 +63,11 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :sl_portfolio, SlPortfolio.Repo,
+  username: "postgres",
+  password: "admin",
+  hostname: "localhost",
+  database: "sl_portfolio_dev",
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10

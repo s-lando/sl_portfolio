@@ -3,6 +3,8 @@ defmodule SlPortfolio.Chess.GameServer do
 
   alias Chess.Game
   alias SlPortfolio.PubSub
+  alias SlPortfolio.Repo
+  alias SlPortfolio.Chess.GameState
 
   @topic "chess:game"
 
@@ -18,7 +20,15 @@ defmodule SlPortfolio.Chess.GameServer do
   def topic, do: @topic
 
   @impl true
-  def init(_), do: {:ok, %{game: Game.new(), log: []}}
+  def init(_) do
+    state =
+      case Repo.one(GameState) do
+        nil -> %{game: Game.new(), log: []}
+        record -> :erlang.binary_to_term(record.state)
+      end
+
+    {:ok, state}
+  end
 
   @impl true
   def handle_call(:get_state, _from, state), do: {:reply, state, state}
@@ -34,6 +44,7 @@ defmodule SlPortfolio.Chess.GameServer do
         }
 
         new_state = %{game: new_game, log: [entry | log]}
+        persist(new_state)
         Phoenix.PubSub.broadcast(PubSub, @topic, {:game_updated, new_state})
         {:reply, {:ok, new_state}, new_state}
 
@@ -45,7 +56,22 @@ defmodule SlPortfolio.Chess.GameServer do
   @impl true
   def handle_call(:reset, _from, _state) do
     new_state = %{game: Game.new(), log: []}
+    persist(new_state)
     Phoenix.PubSub.broadcast(PubSub, @topic, {:game_updated, new_state})
     {:reply, :ok, new_state}
+  end
+
+  defp persist(state) do
+    binary = :erlang.term_to_binary(state)
+
+    case Repo.one(GameState) do
+      nil ->
+        Repo.insert!(%GameState{state: binary})
+
+      record ->
+        record
+        |> Ecto.Changeset.change(state: binary)
+        |> Repo.update!()
+    end
   end
 end
