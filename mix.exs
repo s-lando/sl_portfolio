@@ -46,7 +46,7 @@ defmodule SlPortfolio.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.7"},
       {:ecto_sql, "~> 3.10"},
-      {:postgrex, ">= 0.0.0"}
+      {:postgrex, "~> 0.19"}
     ]
   end
 
