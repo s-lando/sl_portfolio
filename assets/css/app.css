@@ -672,7 +672,7 @@ ul {
   width: 88%;
   height: 88%;
   background: transparent;
-  box-shadow: inset 0 0 0 7% rgba(0, 0, 0, 0.38);
+  border: 4px solid rgba(0, 0, 0, 0.5);
 }
 
 /* Footer */
