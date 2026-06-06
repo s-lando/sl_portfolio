@@ -469,7 +469,7 @@ ul {
   .nav {
     flex-direction: row;
     width: 100%;
-    height: 10dvh;
+    height: 10vh;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -749,13 +749,37 @@ ul {
   color: #333;
 }
 
-.log-row-even { background-color: #f4f4f4; }
-.log-row-odd  { background-color: #ffffff; }
+.log-row-even {
+  background-color: #f4f4f4;
+}
 
-.log-num      { color: #888; width: 2em; }
-.log-move     { font-weight: 600; white-space: nowrap; }
-.log-location { color: #555; max-width: 12em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.log-time     { color: #888; white-space: nowrap; font-size: 0.9em; }
+.log-row-odd {
+  background-color: #ffffff;
+}
+
+.log-num {
+  color: #888;
+  width: 2em;
+}
+
+.log-move {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.log-location {
+  color: #555;
+  max-width: 12em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.log-time {
+  color: #888;
+  white-space: nowrap;
+  font-size: 0.9em;
+}
 
 @media screen and (max-width: 800px) {
   .move-log {
