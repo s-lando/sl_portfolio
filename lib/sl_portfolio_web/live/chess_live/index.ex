@@ -131,22 +131,22 @@ defmodule SlPortfolioWeb.ChessLive.Index do
   defp add_class(classes, false, _name, alt), do: [alt | classes]
 
   def piece_glyph(%Chess.Piece{color: color, kind: kind}) do
-    glyphs = %{
-      white: %{king: "♔", queen: "♕", rook: "♖", bishop: "♗", knight: "♘", pawn: "♙"},
-      black: %{king: "♚", queen: "♛", rook: "♜", bishop: "♝", knight: "♞", pawn: "♟"}
-    }
-
-    glyphs[color][kind]
+    "/images/pieces/#{color}_#{kind}.svg"
   end
 
   def status_message(:checkmate), do: "Checkmate!"
   def status_message(:stalemate), do: "Stalemate — it's a draw."
 
   def move_label(%Chess.Move{piece: piece, from: from, to: to, castle: castle}) do
+    glyphs = %{
+      white: %{king: "♔", queen: "♕", rook: "♖", bishop: "♗", knight: "♘", pawn: "♙"},
+      black: %{king: "♚", queen: "♛", rook: "♜", bishop: "♝", knight: "♞", pawn: "♟"}
+    }
+
     cond do
       castle == :kingside -> "O-O"
       castle == :queenside -> "O-O-O"
-      true -> "#{piece_glyph(piece)} #{square_name(from)}→#{square_name(to)}"
+      true -> "#{glyphs[piece.color][piece.kind]} #{square_name(from)}→#{square_name(to)}"
     end
   end
 

@@ -39,7 +39,7 @@
               <span class="coord coord-file"><%= <<?a + col>> %></span>
             <% end %>
             <%= if piece do %>
-              <span class={"piece piece-#{piece.color}"}><%= piece_glyph(piece) %></span>
+              <img class="piece" src={piece_glyph(piece)} alt={"#{piece.color} #{piece.kind}"} />
             <% end %>
             <%= if legal do %>
               <span class={if piece, do: "legal-ring", else: "legal-dot"}></span>
