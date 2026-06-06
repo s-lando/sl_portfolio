@@ -769,7 +769,7 @@ ul {
 
 .log-location {
   color: #555;
-  max-width: 12em;
+  max-width: 18em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -783,7 +783,7 @@ ul {
 
 @media screen and (max-width: 800px) {
   .move-log {
-    width: min(480px, 94vw);
+    width: 90vw;
   }
 
   .move-log-table {
