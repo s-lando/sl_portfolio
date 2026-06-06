@@ -50,6 +50,18 @@
     <% end %>
   </div>
 
+  <%= if @pending_move do %>
+    <div class="move-confirm-backdrop">
+      <div class="move-confirm-dialog">
+        <p class="move-confirm-text">It looks like you made the last move. Let someone else play?</p>
+        <div class="move-confirm-buttons">
+          <button phx-click="cancel_move" class="move-confirm-btn move-confirm-cancel">Cancel</button>
+          <button phx-click="confirm_move" class="move-confirm-btn move-confirm-continue">Continue anyway</button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <%= if @game.status != :playing do %>
     <div class="chess-footer">
       <button phx-click="reset" class="reset-button">New Game</button>

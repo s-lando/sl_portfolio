@@ -11,15 +11,18 @@ defmodule SlPortfolioWeb.ChessLive.Index do
       Phoenix.PubSub.subscribe(SlPortfolio.PubSub, GameServer.topic())
     end
 
-    %{game: game, log: log} = GameServer.get_state()
+    %{game: game, log: log} = state = GameServer.get_state()
+    last_mover_ip = Map.get(state, :last_mover_ip)
 
     {:ok,
      socket
      |> assign(game_assigns(game))
      |> assign(:log, log)
      |> assign(:ip, ip)
+     |> assign(:last_mover_ip, last_mover_ip)
      |> assign(:selected, nil)
-     |> assign(:legal_moves, [])}
+     |> assign(:legal_moves, [])
+     |> assign(:pending_move, nil)}
   end
 
   @impl true
@@ -30,19 +33,10 @@ defmodule SlPortfolioWeb.ChessLive.Index do
 
     cond do
       selected != nil and square in socket.assigns.legal_moves ->
-        location = Geolocation.lookup(socket.assigns.ip)
-
-        case GameServer.move(selected, square, location) do
-          {:ok, %{game: new_game, log: log}} ->
-            {:noreply,
-             socket
-             |> assign(game_assigns(new_game))
-             |> assign(:log, log)
-             |> assign(:selected, nil)
-             |> assign(:legal_moves, [])}
-
-          {:error, _} ->
-            {:noreply, socket |> assign(:selected, nil) |> assign(:legal_moves, [])}
+        if socket.assigns.ip != nil and socket.assigns.ip == socket.assigns.last_mover_ip do
+          {:noreply, socket |> assign(:pending_move, {selected, square})}
+        else
+          do_move(socket, selected, square)
         end
 
       has_current_piece?(game, square) ->
@@ -57,17 +51,32 @@ defmodule SlPortfolioWeb.ChessLive.Index do
   end
 
   @impl true
+  def handle_event("confirm_move", _params, socket) do
+    case socket.assigns.pending_move do
+      {from, to} -> do_move(socket, from, to)
+      nil -> {:noreply, socket}
+    end
+  end
+
+  @impl true
+  def handle_event("cancel_move", _params, socket) do
+    {:noreply, socket |> assign(:pending_move, nil) |> assign(:selected, nil) |> assign(:legal_moves, [])}
+  end
+
+  @impl true
   def handle_event("reset", _params, socket) do
     GameServer.reset()
     {:noreply, socket}
   end
 
   @impl true
-  def handle_info({:game_updated, %{game: game, log: log}}, socket) do
+  def handle_info({:game_updated, %{game: game, log: log} = state}, socket) do
     {:noreply,
      socket
      |> assign(game_assigns(game))
      |> assign(:log, log)
+     |> assign(:last_mover_ip, Map.get(state, :last_mover_ip))
+     |> assign(:pending_move, nil)
      |> assign(:selected, nil)
      |> assign(:legal_moves, [])}
   end
@@ -104,6 +113,29 @@ defmodule SlPortfolioWeb.ChessLive.Index do
       end
 
     %{game: game, last_move_squares: last_move_squares, check_square: check_square}
+  end
+
+  defp do_move(socket, from, to) do
+    location = Geolocation.lookup(socket.assigns.ip)
+
+    case GameServer.move(from, to, location, socket.assigns.ip) do
+      {:ok, %{game: new_game, log: log, last_mover_ip: last_mover_ip}} ->
+        {:noreply,
+         socket
+         |> assign(game_assigns(new_game))
+         |> assign(:log, log)
+         |> assign(:last_mover_ip, last_mover_ip)
+         |> assign(:selected, nil)
+         |> assign(:legal_moves, [])
+         |> assign(:pending_move, nil)}
+
+      {:error, _} ->
+        {:noreply,
+         socket
+         |> assign(:selected, nil)
+         |> assign(:legal_moves, [])
+         |> assign(:pending_move, nil)}
+    end
   end
 
   defp has_current_piece?(game, square) do

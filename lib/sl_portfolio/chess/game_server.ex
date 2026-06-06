@@ -12,8 +12,8 @@ defmodule SlPortfolio.Chess.GameServer do
 
   def get_state, do: GenServer.call(__MODULE__, :get_state)
 
-  def move(from, to, location \\ "Unknown"),
-    do: GenServer.call(__MODULE__, {:move, from, to, location})
+  def move(from, to, location \\ "Unknown", ip \\ nil),
+    do: GenServer.call(__MODULE__, {:move, from, to, location, ip})
 
   def reset, do: GenServer.call(__MODULE__, :reset)
 
@@ -23,8 +23,8 @@ defmodule SlPortfolio.Chess.GameServer do
   def init(_) do
     state =
       case Repo.one(GameState) do
-        nil -> %{game: Game.new(), log: []}
-        record -> :erlang.binary_to_term(record.state)
+        nil -> %{game: Game.new(), log: [], last_mover_ip: nil}
+        record -> record.state |> :erlang.binary_to_term() |> Map.put_new(:last_mover_ip, nil)
       end
 
     {:ok, state}
@@ -34,7 +34,7 @@ defmodule SlPortfolio.Chess.GameServer do
   def handle_call(:get_state, _from, state), do: {:reply, state, state}
 
   @impl true
-  def handle_call({:move, from, to, location}, _from, %{game: game, log: log} = state) do
+  def handle_call({:move, from, to, location, ip}, _from, %{game: game, log: log} = state) do
     case Chess.move(game, from, to) do
       {:ok, new_game} ->
         entry = %{
@@ -43,7 +43,7 @@ defmodule SlPortfolio.Chess.GameServer do
           at: DateTime.utc_now()
         }
 
-        new_state = %{game: new_game, log: [entry | log]}
+        new_state = %{game: new_game, log: [entry | log], last_mover_ip: ip}
         persist(new_state)
         Phoenix.PubSub.broadcast(PubSub, @topic, {:game_updated, new_state})
         {:reply, {:ok, new_state}, new_state}
@@ -55,7 +55,7 @@ defmodule SlPortfolio.Chess.GameServer do
 
   @impl true
   def handle_call(:reset, _from, _state) do
-    new_state = %{game: Game.new(), log: []}
+    new_state = %{game: Game.new(), log: [], last_mover_ip: nil}
     persist(new_state)
     Phoenix.PubSub.broadcast(PubSub, @topic, {:game_updated, new_state})
     {:reply, :ok, new_state}
