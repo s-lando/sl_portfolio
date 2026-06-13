@@ -528,6 +528,28 @@ ul {
   width: 100%;
 }
 
+.chess-main {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5em;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+.chess-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 1 520px;
+  min-width: 0;
+}
+
+.chess-right {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
 .chess-header {
   text-align: center;
   margin-bottom: 0.75em;
@@ -551,7 +573,7 @@ ul {
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
   aspect-ratio: 1;
-  width: min(520px, calc(70vw - 3em));
+  width: min(520px, 100%);
   gap: 0;
   border-radius: 6px;
   border: 3px solid #000000;
@@ -777,17 +799,30 @@ ul {
   background-color: #5a6f80;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 860px) {
   .chess-board {
+    width: min(480px, 100%);
+  }
+
+  .chess-left {
     width: min(480px, 94vw);
+    flex: 0 0 auto;
+  }
+
+  .chess-main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chess-right {
+    width: min(520px, 94vw);
+    padding-top: 0;
   }
 }
 
 .move-log {
-  width: min(520px, calc(70vw - 3em));
-  margin-top: 1.5em;
+  width: 100%;
   text-align: left;
-  overflow-x: auto;
 }
 
 .move-log h3 {
@@ -800,7 +835,7 @@ ul {
 }
 
 .move-log-table {
-  width: 100%;
+  width: auto;
   border-collapse: collapse;
   font-size: 0.88em;
 }
@@ -851,11 +886,7 @@ ul {
   font-size: 0.9em;
 }
 
-@media screen and (max-width: 800px) {
-  .move-log {
-    width: 90vw;
-  }
-
+@media screen and (max-width: 860px) {
   .move-log-table {
     font-size: 0.78em;
   }

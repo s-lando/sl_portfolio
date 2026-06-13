@@ -17,11 +17,10 @@ defmodule SlPortfolioWeb.Router do
   scope "/", SlPortfolioWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", ChessLive.Index
     get "/about", PageController, :about
     get "/portfolio", PageController, :portfolio
     live "/eoy-lists", MusicLive.Index
-    live "/chess", ChessLive.Index
     get "/shadow", PageController, :shadow
   end
 

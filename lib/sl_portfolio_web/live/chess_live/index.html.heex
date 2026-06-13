@@ -1,51 +1,105 @@
 <div class="chess-page">
-  <div class="chess-header">
-    <p>
-      View the history of the game below and contribute by making the next move:
+  <div class="welcome">
+    <h2>Hey, welcome to my website.</h2>
+
+    <%!-- <p style="text-align: left;">
+      I mainly made this to be a portfolio for my contracting work, but it also contains a few other things that I wanted to put out into the world. I built it using
+      <a class="phoenix" href="https://www.phoenixframework.org/" target="_blank">Phoenix.</a>
+    </p> --%>
+    <p style="text-align: left;">
+      While you're here, consider contributing to the site by making the next move in this chess game:
     </p>
-    <p class="chess-turn">
-      <%= if @game.status == :playing do %>
-        <%= String.capitalize(Atom.to_string(@game.turn)) %>'s Move
-      <% else %>
-        <%= status_message(@game.status) %>
-      <% end %>
-    </p>
+
+    <%!-- <p class="signature">-Sam</p> --%>
   </div>
 
-  <div class="chess-board">
-    <% {rows, cols} = if @game.turn == :white, do: {7..0//-1, 0..7}, else: {0..7, 7..0//-1} %>
-    <% rank_edge_col = if @game.turn == :white, do: 0, else: 7 %>
-    <% file_edge_row = if @game.turn == :white, do: 0, else: 7 %>
-    <%= for row <- rows do %>
-      <div class="chess-row">
-        <%= for col <- cols do %>
-          <% square = {col, row} %>
-          <% piece = Chess.Board.get(@game.board, square) %>
-          <% selected = square == @selected %>
-          <% legal = square in @legal_moves %>
-          <% last_move = square in @last_move_squares %>
-          <% in_check = square == @check_square %>
-          <% dark = rem(col + row, 2) == 0 %>
-          <button
-            class={square_classes(dark, selected, last_move, legal, in_check)}
-            phx-click="select_square"
-            phx-value-col={col}
-            phx-value-row={row}
-          >
-            <%= if col == rank_edge_col do %>
-              <span class="coord coord-rank"><%= row + 1 %></span>
+  <div class="chess-main">
+    <div class="chess-left">
+      <div class="chess-header">
+        <%!-- <p>
+          View the history of the game below and contribute by making the next move:
+        </p> --%>
+        <p class="chess-turn">
+          <%= if @game.status == :playing do %>
+            <%= String.capitalize(Atom.to_string(@game.turn)) %> To Move
+          <% else %>
+            <%= status_message(@game.status) %>
+          <% end %>
+        </p>
+      </div>
+
+      <div class="chess-board">
+        <% {rows, cols} = if @game.turn == :white, do: {7..0//-1, 0..7}, else: {0..7, 7..0//-1} %> <% rank_edge_col =
+          if @game.turn == :white, do: 0, else: 7 %> <% file_edge_row =
+          if @game.turn == :white, do: 0, else: 7 %>
+        <%= for row <- rows do %>
+          <div class="chess-row">
+            <%= for col <- cols do %>
+              <% square = {col, row} %> <% piece = Chess.Board.get(@game.board, square) %> <% selected =
+                square == @selected %> <% legal = square in @legal_moves %> <% last_move =
+                square in @last_move_squares %> <% in_check = square == @check_square %> <% dark =
+                rem(col + row, 2) == 0 %>
+              <button
+                class={square_classes(dark, selected, last_move, legal, in_check)}
+                phx-click="select_square"
+                phx-value-col={col}
+                phx-value-row={row}
+              >
+                <%= if col == rank_edge_col do %>
+                  <span class="coord coord-rank"><%= row + 1 %></span>
+                <% end %>
+
+                <%= if row == file_edge_row do %>
+                  <span class="coord coord-file"><%= <<?a + col>> %></span>
+                <% end %>
+
+                <%= if piece do %>
+                  <img class="piece" src={piece_glyph(piece)} alt={"#{piece.color} #{piece.kind}"} />
+                <% end %>
+
+                <%= if legal do %>
+                  <span class={if piece, do: "legal-ring", else: "legal-dot"}></span>
+                <% end %>
+              </button>
             <% end %>
-            <%= if row == file_edge_row do %>
-              <span class="coord coord-file"><%= <<?a + col>> %></span>
-            <% end %>
-            <%= if piece do %>
-              <img class="piece" src={piece_glyph(piece)} alt={"#{piece.color} #{piece.kind}"} />
-            <% end %>
-            <%= if legal do %>
-              <span class={if piece, do: "legal-ring", else: "legal-dot"}></span>
-            <% end %>
-          </button>
+          </div>
         <% end %>
+      </div>
+
+      <%= if @game.status != :playing do %>
+        <div class="chess-footer">
+          <button phx-click="reset" class="reset-button">New Game</button>
+        </div>
+      <% end %>
+    </div>
+
+    <%= if length(@log) > 0 do %>
+      <div class="chess-right">
+        <div class="move-log">
+          <h3>Move History</h3>
+
+          <table class="move-log-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Move</th>
+                <th>Location</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <%= for {entry, index} <- Enum.with_index(@log) do %>
+                <tr class={if rem(index, 2) == 0, do: "log-row-even", else: "log-row-odd"}>
+                  <td class="log-num"><%= length(@log) - index %></td>
+                  <td class="log-move"><%= move_label(entry.move) %></td>
+                  <td class="log-location"><%= entry.location %></td>
+                  <td class="log-time"><%= format_timestamp(entry.at) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     <% end %>
   </div>
@@ -53,44 +107,20 @@
   <%= if @pending_move do %>
     <div class="move-confirm-backdrop">
       <div class="move-confirm-dialog">
-        <p class="move-confirm-text">It looks like you made the last move. Let someone else play?</p>
+        <p class="move-confirm-text">
+          It looks like you made the last move. Let someone else play?
+        </p>
+
         <div class="move-confirm-buttons">
-          <button phx-click="cancel_move" class="move-confirm-btn move-confirm-cancel">Cancel</button>
-          <button phx-click="confirm_move" class="move-confirm-btn move-confirm-continue">Continue anyway</button>
+          <button phx-click="cancel_move" class="move-confirm-btn move-confirm-cancel">
+            Cancel
+          </button>
+
+          <button phx-click="confirm_move" class="move-confirm-btn move-confirm-continue">
+            Continue anyway
+          </button>
         </div>
       </div>
-    </div>
-  <% end %>
-
-  <%= if @game.status != :playing do %>
-    <div class="chess-footer">
-      <button phx-click="reset" class="reset-button">New Game</button>
-    </div>
-  <% end %>
-
-  <%= if length(@log) > 0 do %>
-    <div class="move-log">
-      <h3>Move History</h3>
-      <table class="move-log-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Move</th>
-            <th>Location</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= for {entry, index} <- Enum.with_index(@log) do %>
-            <tr class={if rem(index, 2) == 0, do: "log-row-even", else: "log-row-odd"}>
-              <td class="log-num"><%= length(@log) - index %></td>
-              <td class="log-move"><%= move_label(entry.move) %></td>
-              <td class="log-location"><%= entry.location %></td>
-              <td class="log-time"><%= format_timestamp(entry.at) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
     </div>
   <% end %>
 </div>
