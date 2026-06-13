@@ -543,6 +543,9 @@ ul {
   align-items: center;
   flex: 0 1 520px;
   min-width: 0;
+  position: sticky;
+  top: 1.5em;
+  align-self: flex-start;
 }
 
 .chess-right {
@@ -807,6 +810,7 @@ ul {
   .chess-left {
     width: min(480px, 94vw);
     flex: 0 0 auto;
+    position: static;
   }
 
   .chess-main {
